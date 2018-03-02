@@ -6,6 +6,10 @@ import ListItem from '../components/ListItem'
 import * as AppActions from '../actions'
 
 class App extends Component {
+  componentDidMount(){
+    this.props.actions.loadPHoneBooks();
+  }
+
   render(){
     const {data, actions} = this.props
     return(
@@ -14,7 +18,7 @@ class App extends Component {
       <div className="well text-center"><h1>Phone Book Apps</h1></div>
       </div>
       <div className="row">
-      <AppTextInput name="" phone="" onSave={actions.addData} />
+      <AppTextInput name="" phone="" onSave={actions.addPHoneBook} />
       </div>
       <ListItem data={data} actions={actions} />
       </div>
