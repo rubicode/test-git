@@ -1,4 +1,4 @@
-import {ADD_DATA, EDIT_DATA, DELETE_DATA, DELETE_ALL, LOAD_PHONEBOOKS_SUCESS, LOAD_PHONEBOOKS_FAILURE, ADD_PHONEBOOKS_SUCESS, ADD_PHONEBOOKS_FAILURE} from '../constants/ActionTypes'
+import {ADD_DATA, EDIT_DATA, DELETE_DATA, DELETE_ALL, LOAD_PHONEBOOKS_SUCESS, LOAD_PHONEBOOKS_FAILURE, ADD_PHONEBOOKS_SUCESS, ADD_PHONEBOOKS_FAILURE, DELETE_PHONEBOOKS_SUCESS, DELETE_PHONEBOOKS_FAILURE, EDIT_PHONEBOOKS_SUCESS, EDIT_PHONEBOOKS_FAILURE} from '../constants/ActionTypes'
 
 export default function data(state = [], action){
   switch (action.type) {
@@ -12,8 +12,32 @@ export default function data(state = [], action){
     }else{
       return [action.phonebook, ...state]
     }
+
+    case EDIT_PHONEBOOKS_SUCESS:
+    let editbooks = state
+    let idEdit = editbooks.map(function(x){
+      return x.id
+    }).indexOf(parseInt(action.id))
+    if(idEdit > -1){
+      return state
+    }else{
+      return [...state]
+    }
+
+    case DELETE_PHONEBOOKS_SUCESS:
+    let deletebooks = state
+    let idHapus = deletebooks.map(function(x){
+      return x.id
+    }).indexOf(parseInt(action.id))
+    if(idHapus > -1){
+      return state
+    }else{
+      return [...state]
+    }
+
     case LOAD_PHONEBOOKS_SUCESS:
     return action.phonebooks
+
     case ADD_DATA:
     return [
       {
@@ -24,7 +48,9 @@ export default function data(state = [], action){
       ...state
     ]
     case EDIT_DATA:
-    return state.map(data => data.id === action.id ? Object.assign({}, data, {name: action.name, phone: action.phone}) : data)
+    return state.map(data => data.id === action.id ? Object.assign({}, data, {name:action.name, phone: action.phone}): data)
+
+
     case DELETE_DATA:
     return state.filter(data => data.id !== action.id)
 

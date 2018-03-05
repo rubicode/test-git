@@ -19,6 +19,6 @@ app.listen(port, function(error){
   if(error){
     console.error(error)
   }else{
-    console.info("jalan om!!")
+    console.info("server jalan..!!")
   }
 })
