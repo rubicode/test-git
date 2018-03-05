@@ -42,6 +42,9 @@ app.post('/api/phonebooks', function(req, res){
       name: req.body.name,
       phone: req.body.phone
     }
+    console.log(phonebook);
+    console.log(`Ini parameter input name : ${req.body.name} ,phone : ${req.body.phone} `);
+
     phonebooks.push(phonebook)
     fs.writeFile(PHONEBOOKS_FILE, JSON.stringify(phonebooks, null, 3), function(err){
       if(err){
@@ -61,6 +64,7 @@ app.post('/api/phonebooks', function(req, res){
       var phonebooks = JSON.parse(data);
       var id = req.params.id;
       console.log(id);
+      console.log('Ini parameter input name dan phone : '+req.body);
       for (var i = 0; i < phonebooks.length; i++) {
         if (phonebooks[i].id === id) {
           phonebooks.splice(i, 1);
@@ -84,7 +88,7 @@ app.post("/api/phonebooks/:id", function(req, res) {
   let name = req.body.name;
   let phone = req.body.phone;
   console.log('ID : '+id);
-  console.log('Ini parameter input name dan phone : '+req.body);
+  console.log(`Ini parameter input name : ${req.body.name} ,phone : ${req.body.phone} `);
   fs.readFile(PHONEBOOKS_FILE, function(err, data) {
     if (err) {
       console.error(err);
